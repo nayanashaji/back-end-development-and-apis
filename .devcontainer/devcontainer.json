@@ -14,5 +14,6 @@
   },
   "forwardPorts": [8080],
   "updateContentCommand": "npm ci",
-  "postCreateCommand": "node tooling/adjust-url.js"
+  "postCreateCommand": "node tooling/adjust-url.js",
+  "mounts": []
 }

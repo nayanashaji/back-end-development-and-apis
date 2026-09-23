@@ -1,0 +1,12 @@
+{
+  "name": "case_converter",
+  "version": "1.0.0",
+  "description": "case converter package",
+  "license": "ISC",
+  "author": "nayana",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.test.js"
+  }
+}
