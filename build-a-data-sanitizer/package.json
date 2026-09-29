@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "data sanitizer",
   "license": "BSD-3-Clause",
+  "author": "",
+  "type": "module",
+  "main": "middleware.js",
+  "scripts": {
+    "test": "npm start"
+  },
   "dependencies": {
     "express": "^5.2.1"
-  }
+  },
+  "devDependencies": {}
 }
