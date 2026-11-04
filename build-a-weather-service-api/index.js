@@ -3,29 +3,31 @@ import weatherRouter from "./weather.js"
 import path from "path"
 import { fileURLToPath } from "url"
 
-const app=express()
-
-const PORT=3000
-
 const __filename=fileURLToPath(import.meta.url)
 const __dirname=path.dirname(__filename)
 
+const app=express()
+const PORT=3000
+
 app.listen(PORT,()=>{})
 
-app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,"public","index.html"))
-})
+app.use("/index.html",express.static(path.join(__dirname,"public")))
 
 app.get("/api/info",(req,res)=>{
-    res.status(200)
     res.json({
-        name:"This is my api",
-        endpoints:["/api/weather", "/api/greet/:name", "/api/data"]
+        name: "Weather Service API",
+        version: "1.0.0",
+        endpoints: ["/api/weather/:city", "/api/greet/:name", "/api/data"],
     })
 })
 
+app.get("/",(req,res)=>{
+    res.send("Welcome")
+    res.sendFile(path.join(__dirname,"public","index.html"))
+})
+
 app.get("/api/status",(req,res)=>{
-    res.status(200).json({status:200})
+    res.status(200).json({status: 200})
 })
 
 app.get("/docs",(req,res)=>{
@@ -33,18 +35,15 @@ app.get("/docs",(req,res)=>{
 })
 
 app.get("/api/greet/:name",(req,res)=>{
-    res.status(200)
-    const name=req.params
-    res.json({name})
+    res.json({name: req.params})
 })
 
 app.route("/api/data").get((req,res)=>{
-    res.json({})
-    }).post((req,res)=>{
-        res.status(201)
-        res.json()
+    res.json()
+}).post((req,res)=>{
+    res.status(201)
+    res.json()
 })
 
 app.use("/api/weather",weatherRouter)
 
-app.use(express.static(path.join(__dirname,"public")))
