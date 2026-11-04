@@ -11,9 +11,20 @@ app.get("/", (_req, res) => {
   res.sendFile(import.meta.dirname + "/views/index.html");
 });
 
-// Do not change code above this line
-
-// Do not change code below this line
+app.get("/api{/:date}",(req,res)=>{
+  const dateString=req.params.date
+  const date=/^\d+$/.test(dateString)? new Date(Number(dateString)):new Date(dateString)
+  if(!isNaN(date)){
+    const valid_date=new Date(date)
+    res.json({
+      unix:valid_date.getTime(),
+      utc:valid_date.toUTCString()
+    })
+  }
+  else{
+    res.json({error:"Invalid Date"})
+  }
+})
 
 const PORT = 8000;
 const listener = app.listen(PORT, function () {
